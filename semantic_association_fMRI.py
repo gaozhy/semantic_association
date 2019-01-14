@@ -35,7 +35,7 @@ instruct_figure = 'instruction.jpg'
 trigger_figure = 'trigger.png'
 ready_figure = 'ready.png'
 expName = 'SemanticRelationJudgement'  # the experiment name
-data_folder = 'data' + '_' +  expName  # make a directory to store data
+data_folder = 'beh_results'  # make a directory to store data
 stimuli_name = 'sem_stim_run'
 
 # assign the monitor name                                                                                                                                                                                                                                          
