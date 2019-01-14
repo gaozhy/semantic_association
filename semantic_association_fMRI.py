@@ -267,11 +267,11 @@ def ready():
     
 def end_exp():
 
-    trigger = prep_cont('End of Experiment',instru_pos,instru_h )
+    trigger = prep_cont('End of This Run',instru_pos,instru_h )
     trigger.draw()
     end_onset = win.flip()
     keys = event.waitKeys(keyList =['return'],timeStamped = True)
-    print ('end of experiment:',end_onset)
+    print ('end of this run:',end_onset)
     shutdown()
     return end_onset
 
@@ -283,12 +283,11 @@ def run_stimuli(stimuli_file,fixa_list):
     """
     stimuli file is sem_stim_runi.csv file, including the stimuli for each run
     
-    fixa_list is a list, including random jittered fixation time for each trial
     
     """
     # read the stimuli  # re-define, not use numbers, but use keywords
     all_trials, headers = load_conditions_dict(conditionfile=stimuli_file)
-    headers += ['trial_ID', 'conditions','AssociaitonStrength', 'probe_onset','probe_durat', 'fixa1_onset', 'fixa1_durat', 'target_onset', 'target_durat','target_offset','fixa2_onset','fixa2_durat','RT', 'correct','KeyPress'] 
+    headers += ['trial_order_id','probe_onset','probe_durat', 'fixa1_onset', 'fixa1_durat', 'target_onset', 'target_durat','target_offset','fixa2_onset','fixa2_durat','RT', 'correct','KeyPress'] 
     
     # read the fixation duration
 #    all_fixa, fixa_headers = load_conditions_dict(conditionfile=fixa_file)
@@ -300,13 +299,13 @@ def run_stimuli(stimuli_file,fixa_list):
 #    
    # shuffle(all_trials) #- 
     trial_pres_num = 1 # initialize a counter (so that we can have mini-blocks of 10)
-    fixa_num = 0          
+              
     
     #trigger the scanner
     trigger_exp()
     event.waitKeys(keyList=['5'], timeStamped=True)
     #  remind the subjects that experiment starts soon.
-    #ready()
+    #ready()  
     #core.wait(3)  # 2 TRs
     run_onset = win.flip() 
     
@@ -326,9 +325,6 @@ def run_stimuli(stimuli_file,fixa_list):
         no    = prep_cont('N',no_pos,yes_no_h)
 
 
-
-        condition = trial['StimType']
-
         
         
          # draw probe and filp the window
@@ -347,9 +343,9 @@ def run_stimuli(stimuli_file,fixa_list):
         
         # draw target and flip the window           
         target.draw()
-        #yes.draw()
-        #no.draw()
-        timetodraw = fix1_onset + fix_durat1
+        yes.draw()
+        no.draw()
+        timetodraw = fix1_onset + fix1_durat
         while core.monotonicClock.getTime() < (timetodraw - (1/120.0)):
             pass
         event.clearEvents()
@@ -389,13 +385,13 @@ def run_stimuli(stimuli_file,fixa_list):
         fix2_onset = win.flip()                
                 
                 
-        trial['trial_ID']=trial_pres_num
+        trial['trial_order_id']=trial_pres_num
         trial['fixa1_onset'] = fix1_onset - run_onset
-        trial['fixa1_durat']= fix_durat1
+        trial['fixa1_durat']= fix1_durat
         trial['probe_onset'] = probe_onset - run_onset
         trial['probe_durat']= probe_durat
         trial['fixa2_onset'] = fix2_onset -run_onset
-        trial['fixa2_durat']= fix_durat2
+        trial['fixa2_durat']= fix2_durat
         trial['target_onset'] = target_onset - run_onset
         trial['target_offset'] = target_offset - run_onset
         trial['target_durat'] = target_durat
@@ -444,7 +440,7 @@ expClock = core.Clock()
 expClock.reset()   
 
 # run the stimuli
-run_stimuli(stimuli_file,fixa_list)
+run_stimuli(stimuli_file)
 
 # end of the experiment
 end_onset = end_exp()
