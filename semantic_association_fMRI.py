@@ -58,13 +58,13 @@ yes_pos = (-250,-180)
 no_pos = (250,-180)
 image_pos = (0,0) # instruction and trigger and get ready would be shown in images
 
-instru_h = 62 # what is this? 
+instru_h = 62 # word size? maybe  
 text_h = 62
 yes_no_h = 62
 
 
 
-num_skip_trials = 1  # the number of trials that can be skipped, used for testing the scirpt
+
 
 
 num_trials = 45 # total trial numbers of each run 
@@ -80,7 +80,7 @@ fix2_durat = 6
 # response time 
 timelimit_deci = 4
 # slow event related design with each trial lasts 10 second.
-trial_duration = 12
+trial_duration = 10
 
 
 ## define functions
@@ -89,7 +89,7 @@ def get_pwd():
     global curr_dic
     curr_dic = os.path.dirname(sys.argv[0])  # U:/task_fMRI_Experiment/exp_March
     return curr_dic
-    
+  
 # make a folder in the current directory used to store data  - correct
 def makedir(folder_name):
     os.chdir(curr_dic)
@@ -121,11 +121,13 @@ def info_gui(expName):
     if not dlg.OK:
         print ('User cancelled the experiment')
         core.quit()
-   
+  
 # creates a file with a name that is absolute path + info collected from GUI
     filename = data_folder + os.sep + '%s_%s_%s_%s.csv' %(expInfo['subjID'], expInfo['subjName'], expInfo['expdate'], expInfo['run'])
     stimuli_file = stimuli_name +expInfo['run']+'.csv'
     return expInfo, filename,stimuli_file
+
+
 # to avoid overwrite the data. Check whether the file exists, if not, create a new one and write the header.
 # Otherwise, rename it - repeat_n
 # correct
@@ -416,7 +418,7 @@ curr_dic = get_pwd()
 makedir(data_folder)
 
 # record subjects info and create a csv file with the info about subjects
-expInfo, filename, stimuli_file,fixa_file = info_gui(expName)
+expInfo, filename, stimuli_file = info_gui(expName)
 
 # if the data does not exist, create one, otherwise,  rename one –filename-repeat-n
 write_file_not_exist(filename)
