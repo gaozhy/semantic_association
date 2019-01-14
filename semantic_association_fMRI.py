@@ -216,8 +216,8 @@ def read_cont (filename):
     return f
 
 # prepare the content on the screen - content is text
-def prep_cont(line, pos, height):
-    line_text = visual.TextStim(win,line,color = win_text_col,pos = pos,height = height)
+def prep_cont(line, pos, height,color):
+    line_text = visual.TextStim(win,line,color=color,pos = pos,height = height)
     return line_text
 
 
@@ -254,20 +254,20 @@ def instruct(path,instruct_figure):
     
 def trigger_exp():
 
-    trigger = prep_cont('experiment starts soon',instru_pos,instru_h)
+    trigger = prep_cont('experiment starts soon',instru_pos,instru_h,win_text_col)
     trigger.draw()
     win.flip()
     
 def ready():
 
-    trigger = prep_cont('experiment starts soon',instru_pos,instru_h)
+    trigger = prep_cont('experiment starts soon',instru_pos,instru_h,win_text_col)
     trigger.draw()
     ready_onset = win.flip()
     return ready_onset
     
 def end_exp():
 
-    trigger = prep_cont('End of This Run',instru_pos,instru_h )
+    trigger = prep_cont('End of This Run',instru_pos,instru_h,win_text_col )
     trigger.draw()
     end_onset = win.flip()
     keys = event.waitKeys(keyList =['return'],timeStamped = True)
@@ -279,7 +279,7 @@ def end_exp():
 
         
 # display each trial on the screen at the appropriate time
-def run_stimuli(stimuli_file,fixa_list):
+def run_stimuli(stimuli_file):
     """
     stimuli file is sem_stim_runi.csv file, including the stimuli for each run
     
@@ -287,7 +287,7 @@ def run_stimuli(stimuli_file,fixa_list):
     """
     # read the stimuli  # re-define, not use numbers, but use keywords
     all_trials, headers = load_conditions_dict(conditionfile=stimuli_file)
-    headers += ['trial_order_id','probe_onset','probe_durat', 'fixa1_onset', 'fixa1_durat', 'target_onset', 'target_durat','target_offset','fixa2_onset','fixa2_durat','RT', 'correct','KeyPress'] 
+    headers += ['trial_order_id','probe_onset','probe_durat', 'fixa1_onset', 'fixa1_durat', 'target_onset', 'target_durat','target_offset','fixa2_onset','fixa2_durat','RT', 'KeyPress'] 
     
     # read the fixation duration
 #    all_fixa, fixa_headers = load_conditions_dict(conditionfile=fixa_file)
@@ -318,11 +318,12 @@ def run_stimuli(stimuli_file,fixa_list):
           
         # prepare fixation, clue, probe and target for dispaly
         
-        fix  = prep_cont('+',fix_pos,text_h)
-        probe = prep_cont(trial['probe'],probe_pos,text_h)
-        target = prep_cont(trial['target'],target_pos,text_h)
-        yes   = prep_cont('Y',yes_pos,yes_no_h)
-        no    = prep_cont('N',no_pos,yes_no_h)
+        fix  = prep_cont('+',fix_pos,text_h,win_text_col)
+        fix2 = prep_cont('+',fix_pos,text_h,color = (1,0.5,0))
+        probe = prep_cont(trial['probe'],probe_pos,text_h,win_text_col)
+        target = prep_cont(trial['target'],target_pos,text_h,win_text_col)
+        yes   = prep_cont('Y',yes_pos,yes_no_h,win_text_col)
+        no    = prep_cont('N',no_pos,yes_no_h,win_text_col)
 
 
         
@@ -330,7 +331,7 @@ def run_stimuli(stimuli_file,fixa_list):
          # draw probe and filp the window
         probe.draw()
 
-        while core.monotonicClock.getTime() < (run_onset + trial_duration*(trial-1) - (1/120.0)):
+        while core.monotonicClock.getTime() < (run_onset + trial_duration*(trial_pres_num-1) - (1/120.0)):
             pass       
         probe_onset = win.flip()
         
@@ -358,7 +359,7 @@ def run_stimuli(stimuli_file,fixa_list):
         if keys is None:
             RT = 'None'
             keypress = 'None'
-            correct = 'False'
+            #correct = 'False'
             target_offset = target_onset+ timelimit_deci
 
             #write_trial(filename,headers,trial) 
@@ -372,13 +373,13 @@ def run_stimuli(stimuli_file,fixa_list):
             else:
                 keypress = keys[0][0]
                 RT = keys[0][1] - target_onset
-                correct = (keys[0][0]==trial['correct_answer']) 
+                #correct = (keys[0][0]==trial['correct_answer']) 
                 target_offset = keys[0][1] 
                 trial['RT']=RT
-                trial['correct'] = correct
+                #trial['correct'] = correct
                 trial['KeyPress'] = keypress
        
-        fix.draw()
+        fix2.draw()
         timetodraw = target_onset + target_durat
         while core.monotonicClock.getTime() < (timetodraw - (1/120.0)):
             pass
@@ -396,7 +397,7 @@ def run_stimuli(stimuli_file,fixa_list):
         trial['target_offset'] = target_offset - run_onset
         trial['target_durat'] = target_durat
         trial['RT'] = RT
-        trial['correct'] = correct
+        #trial['correct'] = correct
         trial['KeyPress'] = keypress
         
         trial_pres_num +=1 # the number-th presentnted trial
