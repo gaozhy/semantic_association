@@ -1,7 +1,18 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Jan  8 11:51:47 2019
+1: Task description:
+    The participants were asked to make the judgement about whether the two consective 
+word (probe first and target then) were semantic related or not.
 
+2: Slow event fMRI design, trial structure:
+    probe(2s), fix1(2s), target(2s,yes/no), fix2(6s).
+    
+3: 4 runs, each run with 45 trials
+
+4: conditions: Unrelated, Weak association, Medium association, Strong association. 
+    unr,60; wse,40; mse,40; sse,40.
+    
 @author: zg750
 """
 
@@ -61,14 +72,14 @@ num_trials = 45 # total trial numbers of each run
 
 # presentation time of clue and probe
 probe_durat =2
-fix_durat1 = 2
+fix1_durat = 2
 target_durat = 2
-fix_durat2 = 6
+fix2_durat = 6
 
 
 # response time 
 timelimit_deci = 4
-# slow event related design with each trial lasts 12 second.
+# slow event related design with each trial lasts 10 second.
 trial_duration = 12
 
 
