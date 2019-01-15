@@ -252,15 +252,15 @@ def instruct(path,instruct_figure):
     if keys[0][0]=='escape':
         shutdown()
     
-def trigger_exp():
+def trigger_exp(path,trigger_figure):
 
-    trigger = prep_cont('experiment starts soon',instru_pos,instru_h,win_text_col)
+    trigger = visual.ImageStim(win,image = os.path.join(path,trigger_figure),pos = instru_pos)
     trigger.draw()
     win.flip()
     
 def ready():
 
-    trigger = prep_cont('experiment starts soon',instru_pos,instru_h,win_text_col)
+    trigger = prep_cont('Experiment starts soon',instru_pos,instru_h,win_text_col)
     trigger.draw()
     ready_onset = win.flip()
     return ready_onset
@@ -302,7 +302,7 @@ def run_stimuli(stimuli_file):
               
     
     #trigger the scanner
-    trigger_exp()
+    trigger_exp(curr_dic,'trigger.jpg')
     event.waitKeys(keyList=['5'], timeStamped=True)
     #  remind the subjects that experiment starts soon.
     #ready()  
@@ -424,7 +424,7 @@ write_file_not_exist(filename)
 win = set_up_window()
 
 # read the instruction
-# instruct()
+instruct(curr_dic,'instruction.jpg')
 
 # generate the jitter list for the fixation and probe
 # know the number of trials
