@@ -71,16 +71,16 @@ num_trials = 45 # total trial numbers of each run
 
 
 # presentation time of clue and probe
-probe_durat =2
+probe_durat =1
 fix1_durat = 2
-target_durat = 2
-fix2_durat = 6
+target_durat = 1
+fix2_durat = 3
 
 
 # response time 
-timelimit_deci = 4
+timelimit_deci = 3
 # slow event related design with each trial lasts 10 second.
-trial_duration = 10
+trial_duration = 9
 
 
 ## define functions
@@ -354,15 +354,36 @@ def run_stimuli(stimuli_file):
         event.clearEvents()
         target_onset = win.flip()
 
-        keys = event.waitKeys(maxWait = timelimit_deci, keyList =['1','2','escape'],timeStamped = True)
+        keys = event.waitKeys(maxWait = target_durat, keyList =['1','2','escape'],timeStamped = True)
         
-
+        yes.draw()
+        no.draw()
+        time_after_targ=target_onset+target_durat
+        while core.monotonicClock.getTime()<(time_after_targ-1/120.0):
+            pass
+        after_targ=win.flip()
+        
+        
         # If subjects do not press the key within maxwait time, RT is the timilimit and key is none and it is false
         if keys is None:
-            RT = 'None'
-            keypress = 'None'
+            keys = event.waitKeys(maxWait = timelimit_deci-target_durat, keyList =['1','2','escape'],timeStamped = True)
+            if keys is None:
+                RT = 'None'
+                keypress = 'None'
             #correct = 'False'
-            target_offset = target_onset+ timelimit_deci
+                target_offset = target_onset+ timelimit_deci
+            elif type(keys) is list:
+                if keys[0][0]=='escape':
+                    shutdown()
+            
+                else:
+                    keypress = keys[0][0]
+                    RT = keys[0][1] - target_onset
+                    #correct = (keys[0][0]==trial['correct_answer']) 
+                    target_offset = keys[0][1] 
+                    trial['RT']=RT
+                    #trial['correct'] = correct
+                    trial['KeyPress'] = keypress
 
             #write_trial(filename,headers,trial) 
 
@@ -380,9 +401,10 @@ def run_stimuli(stimuli_file):
                 trial['RT']=RT
                 #trial['correct'] = correct
                 trial['KeyPress'] = keypress
-       
+      
+        
         fix2.draw()
-        timetodraw = target_onset + target_durat
+        timetodraw = target_onset + timelimit_deci
         while core.monotonicClock.getTime() < (timetodraw - (1/120.0)):
             pass
         fix2_onset = win.flip()                
