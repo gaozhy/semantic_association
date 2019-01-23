@@ -71,9 +71,9 @@ num_trials = 45 # total trial numbers of each run
 
 
 # presentation time of clue and probe
-probe_durat =1
-fix1_durat = 2
-target_durat = 1
+probe_durat =1.5
+fix1_durat = 1.5
+target_durat = 1.5
 fix2_durat = 3
 
 
@@ -346,8 +346,8 @@ def run_stimuli(stimuli_file):
         
         # draw target and flip the window           
         target.draw()
-        yes.draw()
-        no.draw()
+        #yes.draw()
+        #no.draw()
         timetodraw = fix1_onset + fix1_durat
         while core.monotonicClock.getTime() < (timetodraw - (1/120.0)):
             pass
