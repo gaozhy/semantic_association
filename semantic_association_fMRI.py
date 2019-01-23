@@ -36,7 +36,7 @@ trigger_figure = 'trigger.png'
 ready_figure = 'ready.png'
 expName = 'SemanticRelationJudgement'  # the experiment name
 data_folder = 'beh_results'  # make a directory to store data
-stimuli_name = 'sem_stim_run'
+stimuli_name = 'stim_run'
 
 # assign the monitor name                                                                                                                                                                                                                                          
 monitor_name = 'HP ProOne 600'
@@ -289,7 +289,7 @@ def run_stimuli(stimuli_file):
     """
     # read the stimuli  # re-define, not use numbers, but use keywords
     all_trials, headers = load_conditions_dict(conditionfile=stimuli_file)
-    headers += ['trial_order_id','probe_onset','probe_durat', 'fixa1_onset', 'fixa1_durat', 'target_onset', 'target_durat','target_offset','fixa2_onset','fixa2_durat','RT', 'KeyPress'] 
+    headers += ['trial_pres_id','probe_onset','probe_durat', 'fixa1_onset', 'fixa1_durat', 'target_onset', 'target_durat','target_offset','fixa2_onset','fixa2_durat','RT', 'KeyPress'] 
     
     # read the fixation duration
 #    all_fixa, fixa_headers = load_conditions_dict(conditionfile=fixa_file)
@@ -322,8 +322,8 @@ def run_stimuli(stimuli_file):
         
         fix  = prep_fix1()
         fix2 = prep_cont('+',fix_pos,text_h,color = (-1,-1,-1))
-        probe = prep_cont(trial['probe'],probe_pos,text_h,win_text_col)
-        target = prep_cont(trial['target'],target_pos,text_h,win_text_col)
+        probe = prep_cont(trial['Probe'],probe_pos,text_h,win_text_col)
+        target = prep_cont(trial['Target'],target_pos,text_h,win_text_col)
         yes   = prep_cont('Y',yes_pos,yes_no_h,win_text_col)
         no    = prep_cont('N',no_pos,yes_no_h,win_text_col)
 
@@ -410,7 +410,7 @@ def run_stimuli(stimuli_file):
         fix2_onset = win.flip()                
                 
                 
-        trial['trial_order_id']=trial_pres_num
+        trial['trial_pres_id']=trial_pres_num
         trial['fixa1_onset'] = fix1_onset - run_onset
         trial['fixa1_durat']= fix1_durat
         trial['probe_onset'] = probe_onset - run_onset
