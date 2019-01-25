@@ -16,10 +16,10 @@ Trial_ID,Probe,Target,Cate,Wlevel
 15, buyer,solicitor,low,2
 16,hairband,dryer,low,2
 17,portrait,cargo,UR,0
-18,flight,forest,UR,0
-19,train,spanner,UR,0
-20,pot,egg,low,0
-21,stapler,mallet,low,0
+18,flight,tooth,UR,0
+19,train,egg,UR,0
+20,pot,spanner,UR,0
+21,stapler,forest,UR,0
 22,damp,plug,UR,0
 23,archery,bruise,UR,0
-24,lab,tooth,UR,0
+24,lab,mallet,UR,0

@@ -59,7 +59,7 @@ no_pos = (250,-180)
 image_pos = (0,0) # instruction and trigger and get ready would be shown in images
 
 instru_h = 62 # word size? maybe  
-text_h = 62
+text_h = 80
 yes_no_h = 62
 
 
@@ -221,7 +221,8 @@ def prep_cont(line, pos, height,color):
     return line_text
 
 def prep_fix1():
-    draw_fix1=visual.Circle(win,units='pix',radius=30,fillColor=[0,0,0],lineColor=[0,0,0])
+    
+    draw_fix1=visual.Circle(win,units='pix',radius=20,fillColor=[0,0,0],lineColor=[0,0,0])
     return draw_fix1
 # prepare the content on the screen - pictures
 # create an image stimulus for presenting the images in
@@ -319,13 +320,13 @@ def run_stimuli(stimuli_file):
         #''' trial is a ordered dictionary. The key is the first raw of the stimuli csv file'''
           
         # prepare fixation, clue, probe and target for dispaly
-        
-        fix  = prep_fix1()
-        fix2 = prep_cont('+',fix_pos,text_h,color = (-1,-1,-1))
+
+            
+        fix2 = prep_cont('+',fix_pos,text_h,color = (1,0,0))
         probe = prep_cont(trial['Probe'],probe_pos,text_h,win_text_col)
         target = prep_cont(trial['Target'],target_pos,text_h,win_text_col)
-        yes   = prep_cont('Y',yes_pos,yes_no_h,win_text_col)
-        no    = prep_cont('N',no_pos,yes_no_h,win_text_col)
+        #yes   = prep_cont('Y',yes_pos,yes_no_h,win_text_col)
+        #no    = prep_cont('N',no_pos,yes_no_h,win_text_col)
 
 
         
@@ -338,7 +339,12 @@ def run_stimuli(stimuli_file):
         probe_onset = win.flip()
         
         # draw fixa between probe and target and flip the window
-        fix.draw()
+        #fix.draw()
+        for i in range(3):
+            
+            fix=visual.Circle(win,units='pix',radius=20,fillColor=[0,0,0],lineColor=[0,0,0],pos=[-120+120*i,0])
+            fix.draw()
+            
         timetodraw = probe_onset + probe_durat
         while core.monotonicClock.getTime() < (timetodraw - (1/120.0)):
             pass
@@ -356,8 +362,8 @@ def run_stimuli(stimuli_file):
 
         keys = event.waitKeys(maxWait = target_durat, keyList =['1','2','escape'],timeStamped = True)
         
-        yes.draw()
-        no.draw()
+        #yes.draw()
+        #no.draw()
         time_after_targ=target_onset+target_durat
         while core.monotonicClock.getTime()<(time_after_targ-1/120.0):
             pass
