@@ -1,46 +1,58 @@
-Trial_ID,Probe,Target,Cate,Wlevel
-37, army,crag,ur,0
-54,uncle,loan,ur,0
-45,mop,skin,ur,0
-177,volcano ,lava,high,7
-110,laminator,sellotape,med,4
-162,jug, water,high,7
-27,basketball,dessert,ur,0
-82,hair ,navel,low,1
-179,bed,duvet,high,7
-1,cottage,thigh,ur,0
-116, office,politician,med,4
-76,tape,book,low,1
-84,confetti,helium,low,1
-77,steak,money,low,1
-35,rhinoceros,rug,ur,0
-19,goat,jacket,ur,0
-87,worm,pear,low,2
-40,crocodile,velcro,ur,0
-156,scales,weights,high,6
-128,curb,streetlight,med,4
-108,painting,chalk,med,3
-173,thread, stitch,high,7
-152, bonus,extra,high,6
-138, language,voice,med,5
-114,speech ,text,med,4
-172,fiction,author,high,7
-157,lorry, highway,high,7
-99,dirt,gravestone,low,2
-59,hall,oats,ur,0
-20,error,ship,ur,0
-119,wall,clock,med,4
-101, shirt,lace,med,3
-90,meal,liquid,low,2
-153,paddle,kayak,high,6
-50,dart,clover,ur,0
-51,tornado,pup,ur,0
-88,boot,trail,low,2
-79,goggles,towel,low,1
-147,bedroom, dresser,high,6
-136,robot,wires,med,5
-3,seat,grapefruit,ur,0
-47,juice,sand,ur,0
-83,cat,wool,low,1
-41,kangaroo,aerial,ur,0
-117,judge,gavel,med,4
+Trial_ID,Probe,Target
+147,bedroom,dresser
+150,hymn,organ
+163,tea,mug
+74,thermostat,mercury
+78,duster,tiles
+72,keys,passport
+62,cheek,chops
+70,fur,money
+129,forge,blacksmith
+107,classroom,easel
+134,reed,marsh
+51,tornado,pup
+33,arrow,pineapple
+7,antelope,capsule
+86,wolf,sledge
+182,lavender,wig
+212,whale,plankton
+196,deity,invocation
+221,kitchen,chef
+103,dishwasher,colander
+38,newt,lightning
+100,factory,cardboard
+157,lorry,highway
+58,cleaver,coffee
+76,tape,book
+205,bird,gun
+143,antique,museum
+81,dinner,dog
+172,fiction,author
+187,ache,bruise
+159,cocktail,bar
+202,town,chief
+89,sink,filter
+42,university,pig
+162,jug,water
+28,albatross,uniform
+128,curb,streetlight
+145,bookmark,page
+164,frame,picture
+151,cactus,desert
+17,printer,trumpet
+223,business,customer
+131,canvas,wall
+220,pulpit,preacher
+194,trolley,lollipop
+41,kangaroo,aerial
+227,medicine,doctor
+120,plane,hangar
+47,juice,sand
+195,aquifer,turtle
+111,funeral,candle
+180,ashtray,cigarette
+98,meaning,idea
+213,vet,animal
+80,nature,child
+14,taxi,blossom
+193,dove,trainer

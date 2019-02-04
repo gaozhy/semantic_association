@@ -67,7 +67,7 @@ yes_no_h = 62
 
 
 
-num_trials = 45 # total trial numbers of each run 
+num_trials = 57 # total trial numbers of each run 
 
 
 # presentation time of clue and probe
@@ -322,7 +322,7 @@ def run_stimuli(stimuli_file):
         # prepare fixation, clue, probe and target for dispaly
 
             
-        fix2 = prep_cont('+',fix_pos,text_h,color = (1,0,0))
+        fix2 = prep_cont('+',fix_pos,text_h,color = (1,-1,-1))
         probe = prep_cont(trial['Probe'],probe_pos,text_h,win_text_col)
         target = prep_cont(trial['Target'],target_pos,text_h,win_text_col)
         #yes   = prep_cont('Y',yes_pos,yes_no_h,win_text_col)
